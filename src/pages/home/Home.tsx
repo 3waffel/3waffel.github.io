@@ -2,7 +2,7 @@ import Showcase from "../../components/showcase/Showcase";
 
 export default function Home() {
   return (
-    <div className="p-5 pt-3 min-h-80 min-w-60" flex="~ col">
+    <div className="min-h-80 min-w-60 p-5 pt-3" flex="~ col">
       <div className="invert" font="serif">
         <h2>Links</h2>
         <p>You could ( possibly ) find me on:</p>

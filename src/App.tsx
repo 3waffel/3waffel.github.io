@@ -18,7 +18,7 @@ function App() {
 
   return (
     <div
-      className="overflow-hidden grid justify-center content-center"
+      className="grid content-center justify-center overflow-hidden"
       bg="gray-9"
       h="screen"
     >

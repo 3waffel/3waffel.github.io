@@ -1,44 +1,32 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     utils.url = "github:numtide/flake-utils";
+    pnpm2nix = {
+      url = "github:3waffel/pnpm2nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
     self,
     nixpkgs,
     utils,
+    pnpm2nix,
   }:
     utils.lib.eachDefaultSystem (
       system: let
-        pkgs = import nixpkgs {inherit system;};
-        lib = pkgs.lib;
-      in rec {
-        packages.site = pkgs.stdenv.mkDerivation {
-          name = "site";
-          src = ./site;
-          buildInputs = with pkgs; [
-            zola
-          ];
-          phases = ["buildPhase" "installPhase"];
-          buildPhase = ''
-            cp -r $src/. .
-            zola build
-          '';
-          installPhase = ''
-            cp -r public $out
-          '';
-          ZOLA_ENV = "prod";
+        pkgs = import nixpkgs {
+          inherit system;
+          overlays = [pnpm2nix.overlays.default];
         };
-
-        defaultPackage = packages.site;
-
-        devShell = with pkgs;
-          mkShell {
-            buildInputs = [
-              zola
-            ];
+      in {
+        packages = rec {
+          site = pkgs.mkPnpmPackage {
+            src = ./.;
           };
+          default = site;
+        };
       }
     );
 }

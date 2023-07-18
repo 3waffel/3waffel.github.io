@@ -1,0 +1,28 @@
+name: "Build Nix package and deploy on github page"
+
+on:
+  push:
+    branches:
+      - new
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@v22
+        with:
+          extra_nix_config: |
+            access-tokens = github.com=${{ github.token }}
+
+      - name: Building package
+        run: nix build --print-build-logs --no-sandbox
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ github.token }}
+          publish_dir: result
+          publish_branch: gh-pages-new

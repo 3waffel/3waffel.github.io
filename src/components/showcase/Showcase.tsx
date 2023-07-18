@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { Canvas, useFrame, MeshProps } from "@react-three/fiber";
 
 function Box(props: MeshProps) {
