@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <div className="pl-2 pb-30 bg-inherit" border="t-solid 1 orange-50">
+    <div className="bg-inherit pb-30 pl-2" border="t-solid 1 orange-50">
       <div font="serif" text="orange50">
         <p>
           by{" "}

@@ -1,26 +1,28 @@
-import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
-import Home from "./pages/home/Home";
-import About from "./pages/about/About";
 import Navbar from "./components/navbar/Navbar";
 import Sketchboard from "./components/sketchboard/Sketchboard";
+import Home from "./pages/home/Home";
+import About from "./pages/about/About";
+import Settings from "./pages/settings/Settings";
+import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 
 const navigators = [
   { to: "/", name: "Home" },
   { to: "/about", name: "About" },
+  { to: "/settings", name: "Settings" },
 ];
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      <div className="flex min-w-60 min-h-10 h-full overflow-y-auto">
+      <div className="h-full min-h-10 min-w-60 flex overflow-y-auto">
         <Navbar navigators={navigators} />
         <Outlet />
       </div>
     ),
-    errorElement: <a className="text-orange50 p-30">Not Found</a>,
+    errorElement: <a className="p-30 text-orange50">Not Found</a>,
     children: [
       {
         path: "",
@@ -29,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: "about",
         element: <About />,
+      },
+      {
+        path: "settings",
+        element: <Settings />,
       },
     ],
   },
@@ -43,7 +49,7 @@ function App() {
       flex="~ justify-center"
     >
       <div
-        className="m-3 bg-transparent min-w-40% z-1"
+        className="z-1 m-3 min-w-40% bg-transparent"
         hover="animate-paused"
         flex="~ col"
       >
@@ -51,7 +57,7 @@ function App() {
         <RouterProvider router={router} />
         <Footer />
       </div>
-      <div className="absolute h-full w-full bg-transparent overflow-hidden opacity-30">
+      <div className="absolute h-full w-full overflow-hidden bg-transparent opacity-30">
         <Sketchboard />
       </div>
     </div>

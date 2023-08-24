@@ -14,7 +14,7 @@ export default function Navbar({ navigators }: NavbarProps) {
     >
       {navigators.map((item, i) => (
         <Link
-          className="no-underline link-text-orange50 visited-text-orange50 pb-2"
+          className="pb-2 no-underline link-text-orange50 visited-text-orange50"
           text="right"
           hover="text-orange200"
           to={item.to}

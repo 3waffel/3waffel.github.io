@@ -42,7 +42,7 @@ export default function Home() {
 
       <p>You could ( possibly ) find me on:</p>
       <div
-        className="pl-3 mb-5"
+        className="mb-5 pl-3"
         text="orange50 opacity-80"
         font="mono"
         grid="~ cols-1 gap-2"
@@ -60,19 +60,19 @@ export default function Home() {
 
       <p>Things of little importance:</p>
       <div
-        className="pl-3 mb-5"
+        className="mb-5 pl-3"
         text="orange50 opacity-80"
         font="mono"
         grid="~ cols-1 gap-2"
       >
         {links2.map((link, i) => (
-          <Link
-            to={link.url}
+          <a
+            href={link.url}
             key={i}
             className="link-text-orange100 visited-text-orange100"
           >
             {link.name}
-          </Link>
+          </a>
         ))}
       </div>
     </div>
