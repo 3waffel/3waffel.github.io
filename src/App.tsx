@@ -57,7 +57,11 @@ function App() {
         <RouterProvider router={router} />
         <Footer />
       </div>
-      <div className="absolute h-full w-full overflow-hidden bg-transparent opacity-30">
+      <div
+        className="absolute h-full w-full overflow-hidden bg-transparent opacity-50 duration-500"
+        transition="opacity"
+        hover="opacity-90"
+      >
         <Sketchboard />
       </div>
     </div>

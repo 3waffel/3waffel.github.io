@@ -2,7 +2,13 @@ import { useAtom } from "jotai";
 import Select, { SingleValue } from "react-select";
 import { updateSettingsAtom } from "../../store";
 
-const sketchOptions = [{ value: "star", label: "Star" }];
+const sketchOptions: {
+  value: string;
+  label: string;
+}[] = [
+  { value: "star", label: "Star" },
+  { value: "flow", label: "Flow" },
+];
 
 export default function Settings() {
   const [, updateSettings] = useAtom(updateSettingsAtom);
