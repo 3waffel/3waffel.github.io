@@ -1,7 +1,7 @@
 import Sketch from "react-p5";
 import { useAtom } from "jotai";
 import { settingsAtom } from "../../store";
-import { initFlowSketch, initStarSketch } from "./Sketches";
+import { initFlowSketch, initSpireSketch, initStarSketch } from "./Sketches";
 
 export default function Sketchboard() {
   const [settings] = useAtom(settingsAtom);
@@ -11,6 +11,8 @@ export default function Sketchboard() {
         return initStarSketch();
       case "flow":
         return initFlowSketch();
+      case "spire":
+        return initSpireSketch();
       default:
         return initStarSketch();
     }

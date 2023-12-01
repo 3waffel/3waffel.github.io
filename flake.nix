@@ -3,7 +3,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     utils.url = "github:numtide/flake-utils";
     pnpm2nix = {
-      url = "github:3waffel/pnpm2nix";
+      url = "github:nzbr/pnpm2nix-nzbr";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

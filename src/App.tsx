@@ -2,14 +2,16 @@ import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
 import Navbar from "./components/navbar/Navbar";
 import Sketchboard from "./components/sketchboard/Sketchboard";
-import Home from "./pages/home/Home";
 import About from "./pages/about/About";
+import Projects from "./pages/projects/Projects";
+import Links from "./pages/links/Links";
 import Settings from "./pages/settings/Settings";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 
 const navigators = [
-  { to: "/", name: "Home" },
   { to: "/about", name: "About" },
+  { to: "/projects", name: "Projects" },
+  { to: "/links", name: "Links" },
   { to: "/settings", name: "Settings" },
 ];
 
@@ -25,12 +27,16 @@ const router = createBrowserRouter([
     errorElement: <a className="p-30 text-orange50">Not Found</a>,
     children: [
       {
-        path: "",
-        element: <Home />,
-      },
-      {
         path: "about",
         element: <About />,
+      },
+      {
+        path: "projects",
+        element: <Projects />,
+      },
+      {
+        path: "links",
+        element: <Links />,
       },
       {
         path: "settings",

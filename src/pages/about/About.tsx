@@ -7,6 +7,7 @@ export default function About() {
       font="serif"
     >
       <h2>About</h2>
+      <h4>Contact</h4>
     </div>
   );
 }
