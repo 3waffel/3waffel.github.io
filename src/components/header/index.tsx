@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function Header() {
   return (
     <div
@@ -6,14 +8,19 @@ export default function Header() {
       bg="opacity-100"
       flex="~ items-end"
     >
-      <a href="/" className="flex underline-transparent">
-        <h2 className="pr-3 fw500" font="serif italic" text="orange50">
+      <Link className="flex underline-transparent" to="/">
+        <h2
+          className="pr-3 fw500"
+          text="orange50"
+          hover="text-orange200"
+          font="serif italic"
+        >
           Wafu
         </h2>
         <h2 className="fw500" text="orange100 opacity-90" font="serif">
           Index
         </h2>
-      </a>
+      </Link>
     </div>
   );
 }
