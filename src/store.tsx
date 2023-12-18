@@ -1,15 +1,24 @@
 import { atom } from "jotai";
 
+export enum BackgroundEnum {
+  None,
+  Star,
+  Flow,
+  Spire,
+}
+
 type SettingsType = {
-  sketchOptionValue: string;
+  backgroundOptionValue: BackgroundEnum;
 };
 
-export const settingsAtom = atom<SettingsType>({ sketchOptionValue: "" });
+export const settingsAtom = atom<SettingsType>({
+  backgroundOptionValue: null,
+});
 
 export const updateSettingsAtom = atom(
   () => "",
-  (get, set, sketchOptionValue: string) => {
-    const ns = { ...get(settingsAtom), sketchOptionValue };
+  (get, set, backgroundOptionValue: BackgroundEnum) => {
+    const ns = { ...get(settingsAtom), backgroundOptionValue };
     set(settingsAtom, ns);
   }
 );

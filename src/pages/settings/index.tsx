@@ -1,19 +1,14 @@
 import { useAtom } from "jotai";
-import { updateSettingsAtom } from "../../store";
+import { updateSettingsAtom, BackgroundEnum } from "../../store";
 import { Dropdown } from "flowbite-react";
 
-const sketchOptions: {
-  value: string;
-  label: string;
-}[] = [
-  { value: "none", label: "None" },
-  { value: "star", label: "Star" },
-  { value: "flow", label: "Flow" },
-  { value: "spire", label: "Spire" },
-];
+const sketchOptions = Object.keys(BackgroundEnum).filter((e) =>
+  isNaN(Number(e))
+) as Array<keyof typeof BackgroundEnum>;
 
 export default function Settings() {
   const [, updateSettings] = useAtom(updateSettingsAtom);
+
   return (
     <div
       className="min-w-60 p-5 pt-3"
@@ -30,16 +25,16 @@ export default function Settings() {
         border="dashed 0 t-2 orange1"
         font="serif bold"
       >
-        {sketchOptions.map((option) => (
+        {sketchOptions.map((option, i) => (
           <Dropdown.Item
-            key={option.value}
-            onClick={() => updateSettings(option.value)}
+            key={i}
+            onClick={() => updateSettings(i as BackgroundEnum)}
             className="pt-2 pb-2 bg-transparent"
             text="orange50 hover:orange200"
             border="dashed 0 t-2 orange1"
             font="serif"
           >
-            {option.label}
+            {option}
           </Dropdown.Item>
         ))}
       </Dropdown>

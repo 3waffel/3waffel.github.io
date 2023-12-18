@@ -1,18 +1,18 @@
 import Sketch from "react-p5";
 import { useAtom } from "jotai";
-import { settingsAtom } from "../../store";
+import { settingsAtom, BackgroundEnum } from "../../store";
 import { initFlowSketch, initSpireSketch, initStarSketch } from "../sketches";
 import { useEffect } from "react";
 
-const updateParams = (value: string) => {
+const updateParams = (value: BackgroundEnum) => {
   switch (value) {
-    case "none":
+    case BackgroundEnum.None:
       return { setup: null, draw: null };
-    case "star":
+    case BackgroundEnum.Star:
       return initStarSketch();
-    case "flow":
+    case BackgroundEnum.Flow:
       return initFlowSketch();
-    case "spire":
+    case BackgroundEnum.Spire:
       return initSpireSketch();
     default:
       return initStarSketch();
@@ -21,9 +21,9 @@ const updateParams = (value: string) => {
 
 export default function Sketchboard() {
   const [settings] = useAtom(settingsAtom);
-  const { setup, draw } = updateParams(settings.sketchOptionValue);
+  const { setup, draw } = updateParams(settings.backgroundOptionValue);
 
-  useEffect(() => undefined, [settings.sketchOptionValue]);
+  useEffect(() => undefined, [settings.backgroundOptionValue]);
 
   return setup && draw ? <Sketch setup={setup} draw={draw} /> : <></>;
 }
