@@ -2,11 +2,25 @@ import p5Types from "p5";
 
 let t = 0;
 
+// parameters
+// const choices = ["あ", "い", "う", "え", "お"];
+let duration = 150;
+let speed = 0.03;
+let interval = 10;
+const radius = (size) => size * 10;
+const x = (offset, size) => Math.atan(Math.cos(offset * speed)) * radius(size);
+const y = (offset, size) => Math.atan(Math.sin(offset * speed)) * radius(size);
+
 export function initSpireSketch() {
-  const element = (p5: p5Types, value: string) => {
+  const element = (p5: p5Types) => {
+    const salt = (max = 1, seed = 0) => p5.noise(Math.random() + seed) * max;
+    let color = [salt(55) + 200, salt(55) + 200, salt(55) + 200];
+    // let index = Math.floor(salt(choices.length));
+    // let c = choices[index];
+    let c = ".";
     p5.push();
-    p5.fill(value);
-    p5.text("あ", 0, 0);
+    p5.fill(color);
+    p5.text(c, 0, 0);
     p5.pop();
   };
 
@@ -21,18 +35,21 @@ export function initSpireSketch() {
   const draw = (p5: p5Types) => {
     p5.noStroke();
     p5.clear();
-    for (let i = 0; i < 30; i++) {
-      const speed = i * 0.01,
-        scale = Math.log10(i) * 300;
-      for (let j = 0; j < i ** 0.5; j++) {
-        p5.push();
-        p5.textSize(Math.sin(t * 0.1 + j) * i * 5 + 20);
-        p5.translate(innerWidth / 2, innerHeight / 2);
-        p5.translate(Math.sin(i + j / 3) * scale, Math.cos(i + j / 3) * scale);
-        element(p5, "102");
-        p5.pop();
-      }
+    p5.translate(innerWidth / 2, innerHeight / 2);
+
+    for (let i = 0; i < 1000; i += interval) {
+      let offset = t + i;
+      let size = offset % duration;
+      p5.push();
+      p5.textSize(size);
+      p5.translate(
+        x(offset, size) + p5.noise(i) * 500,
+        y(offset, size) + p5.noise(i) * 500
+      );
+      element(p5);
+      p5.pop();
     }
+
     t += 1;
   };
   return { setup, draw };
