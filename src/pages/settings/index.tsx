@@ -1,13 +1,13 @@
 import { useAtom } from "jotai";
-import { updateSettingsAtom, BackgroundEnum } from "../../store";
+import { BackgroundOption, settingsAtom } from "../../store";
 import { Dropdown } from "flowbite-react";
 
-const sketchOptions = Object.keys(BackgroundEnum).filter((e) =>
+const sketchOptions = Object.keys(BackgroundOption).filter((e) =>
   isNaN(Number(e))
-) as Array<keyof typeof BackgroundEnum>;
+) as Array<keyof typeof BackgroundOption>;
 
 export default function Settings() {
-  const [, updateSettings] = useAtom(updateSettingsAtom);
+  const [settings, updateSettings] = useAtom(settingsAtom);
 
   return (
     <div
@@ -28,7 +28,9 @@ export default function Settings() {
         {sketchOptions.map((option, i) => (
           <Dropdown.Item
             key={i}
-            onClick={() => updateSettings(i as BackgroundEnum)}
+            onClick={() =>
+              updateSettings({ ...settings, backgroundOption: i })
+            }
             className="pt-2 pb-2 bg-transparent"
             text="orange50 hover:orange200"
             border="dashed 0 t-2 orange1"

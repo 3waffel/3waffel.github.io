@@ -64,7 +64,6 @@ export default function Projects() {
       font="serif"
     >
       <h2>Projects</h2>
-      Actually not so many public projects can be put here. 😇
       <div>
         <p font="bold">Toys</p>
         {projectsRenderer(projects_toys)}

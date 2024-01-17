@@ -1,6 +1,6 @@
-import { atom } from "jotai";
+import { atomWithStorage } from "jotai/utils";
 
-export enum BackgroundEnum {
+export enum BackgroundOption {
   None,
   Star,
   Flow,
@@ -8,17 +8,9 @@ export enum BackgroundEnum {
 }
 
 type SettingsType = {
-  backgroundOptionValue: BackgroundEnum;
+  backgroundOption: BackgroundOption;
 };
 
-export const settingsAtom = atom<SettingsType>({
-  backgroundOptionValue: null,
+export const settingsAtom = atomWithStorage<SettingsType>("settings", {
+  backgroundOption: null,
 });
-
-export const updateSettingsAtom = atom(
-  () => "",
-  (get, set, backgroundOptionValue: BackgroundEnum) => {
-    const ns = { ...get(settingsAtom), backgroundOptionValue };
-    set(settingsAtom, ns);
-  }
-);
