@@ -15,7 +15,7 @@ const updateParams = (value: BackgroundOption) => {
     case BackgroundOption.Spire:
       return initSpireSketch();
     default:
-      return initStarSketch();
+      return { setup: null, draw: null };
   }
 };
 
@@ -25,5 +25,5 @@ export default function Sketchboard() {
 
   useEffect(() => undefined, [settings.backgroundOption]);
 
-  return setup && draw ? <Sketch setup={setup} draw={draw} /> : <></>;
+  return setup && draw && <Sketch setup={setup} draw={draw} />;
 }

@@ -15,17 +15,17 @@ export function initFlowSketch() {
   const draw = (p5: p5Types) => {
     p5.clear();
     p5.noFill();
-    p5.strokeWeight(50);
+    p5.strokeWeight(200);
 
-    for (let y = 0; y < innerHeight; y += 200) {
+    for (let y = -200; y < innerHeight + 200; y += 100) {
       p5.push();
       p5.stroke(
-        200 + p5.noise(y + 10 + t * 0.03) * 55,
-        200 + p5.noise(y + 20 + t * 0.03) * 55,
-        200 + p5.noise(y + 30 + t * 0.03) * 55
+        180 + p5.noise(y + 10 + t * 0.03) * 75,
+        180 + p5.noise(y + 20 + t * 0.03) * 75,
+        180 + p5.noise(y + 30 + t * 0.03) * 75
       );
       p5.beginShape();
-      for (let x = 0; x < innerWidth; x += 100) {
+      for (let x = -200; x < innerWidth + 200; x += 100) {
         p5.curveVertex(x, y + Math.cos(y + x + t * 0.01) * 50);
       }
       p5.endShape();
