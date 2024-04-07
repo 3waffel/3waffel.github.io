@@ -1,60 +1,42 @@
-const projects_toys = [
-  {
-    name: "Pixel Filter",
-    url: "https://3waffel.github.io/pixel-filter",
-    description: "Filter images in certain pattern (browser version)",
-  },
-  {
-    name: "ASCII Effect",
-    url: "https://3waffel.github.io/asciieffect",
-    description: "Play ASCII style video (browser version)",
-  },
-  {
-    name: "Shader Showcase",
-    url: "https://3waffel.github.io/shader-showcase",
-    description: "Godot shader playground (browser version)",
-  },
-  {
-    name: "Gallery",
-    url: "https://3waffel.github.io/gallery",
-    description: "Model viewer (browser version)",
-  },
-];
-
-const projects_others = [
-  {
-    name: "3waffel.github.io",
-    url: "https://3waffel.github.io",
-    description: "This site",
-  },
-  {
-    name: "nixconfig",
-    url: "https://github.com/3waffel/nixconfig",
-    description: "Managed Nix configuration",
-  },
-];
+import { useAtom } from "jotai";
+import { linksAtom } from "../../store";
 
 export default function Projects() {
-  const projectsRenderer = (
-    projects: { name: string; url: string; description: string }[]
-  ) => (
+  const [{ data, isPending, isError }] = useAtom(linksAtom);
+
+  const buildProjects = (projects) => (
     <div grid="~ cols-2 gap-2">
-      {projects.map((project, i) => (
+      {projects?.map((item, i) => (
         <div key={i} className="pt3 pb3" border="t-2 0 dashed">
           <li>
             <a
               className="link-text-orange100 visited-text-orange100"
               font="bold"
-              href={project.url}
+              href={item.url}
             >
-              {project.name}
+              {item.name}
             </a>
           </li>
-          <div>{project.description}</div>
+          <div>{item.description}</div>
         </div>
       ))}
     </div>
   );
+
+  let content;
+  if (isPending) {
+    content = <div>Loading</div>;
+  } else if (isError) {
+    content = <div>Failed to load</div>;
+  } else {
+    const projects = data["projects"];
+    content = Object.entries(projects).map(([key, value]) => (
+      <div key={key}>
+        <p font="bold">{key.charAt(0).toUpperCase() + key.slice(1)}</p>
+        {buildProjects(value)}
+      </div>
+    ));
+  }
 
   return (
     <div
@@ -64,12 +46,7 @@ export default function Projects() {
       font="serif"
     >
       <h2>Projects</h2>
-      <div>
-        <p font="bold">Toys</p>
-        {projectsRenderer(projects_toys)}
-        <p font="bold">Others</p>
-        {projectsRenderer(projects_others)}
-      </div>
+      {content}
     </div>
   );
 }
