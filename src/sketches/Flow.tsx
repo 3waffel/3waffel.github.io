@@ -1,18 +1,19 @@
 import { P5CanvasInstance } from "@p5-wrapper/react";
 
-let t = 0;
-
 export function flowSketch(p5: P5CanvasInstance) {
+  p5.windowResized = () => {
+    p5.resizeCanvas(innerWidth, innerHeight);
+  };
+
   p5.setup = () => {
     p5.createCanvas(innerWidth, innerHeight);
     p5.frameRate(20);
     p5.textSize(40);
-    p5.windowResized = () => {
-      p5.resizeCanvas(innerWidth, innerHeight);
-    };
   };
 
   p5.draw = () => {
+    const t = p5.frameCount;
+
     p5.clear();
     p5.noFill();
     p5.strokeWeight(200);
@@ -31,6 +32,5 @@ export function flowSketch(p5: P5CanvasInstance) {
       p5.endShape();
       p5.pop();
     }
-    t += 1;
   };
 }

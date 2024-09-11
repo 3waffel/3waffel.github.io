@@ -1,7 +1,5 @@
 import { P5CanvasInstance } from "@p5-wrapper/react";
 
-let t = 0;
-
 export function starSketch(p5: P5CanvasInstance) {
   const element = (p5: P5CanvasInstance, value) => {
     p5.push();
@@ -10,16 +8,18 @@ export function starSketch(p5: P5CanvasInstance) {
     p5.pop();
   };
 
+  p5.windowResized = () => {
+    p5.resizeCanvas(innerWidth, innerHeight);
+  };
+
   p5.setup = () => {
     p5.createCanvas(innerWidth, innerHeight);
     p5.frameRate(20);
     p5.textSize(40);
-    p5.windowResized = () => {
-      p5.resizeCanvas(innerWidth, innerHeight);
-    };
   };
 
   p5.draw = () => {
+    const t = p5.frameCount;
     p5.clear();
     for (let x = 0; x < innerWidth; x += 400) {
       for (let y = 0; y < innerHeight; y += 200) {
@@ -33,6 +33,5 @@ export function starSketch(p5: P5CanvasInstance) {
         p5.pop();
       }
     }
-    t += 1;
   };
 }
