@@ -1,10 +1,10 @@
-import p5Types from "p5";
+import { P5CanvasInstance } from "@p5-wrapper/react";
 
 let t = 0;
 
-export function initFlowSketch() {
-  const setup = (p5: p5Types, canvasParentRef: Element) => {
-    p5.createCanvas(innerWidth, innerHeight).parent(canvasParentRef);
+export function flowSketch(p5: P5CanvasInstance) {
+  p5.setup = () => {
+    p5.createCanvas(innerWidth, innerHeight);
     p5.frameRate(20);
     p5.textSize(40);
     p5.windowResized = () => {
@@ -12,7 +12,7 @@ export function initFlowSketch() {
     };
   };
 
-  const draw = (p5: p5Types) => {
+  p5.draw = () => {
     p5.clear();
     p5.noFill();
     p5.strokeWeight(200);
@@ -33,5 +33,4 @@ export function initFlowSketch() {
     }
     t += 1;
   };
-  return { setup, draw };
 }

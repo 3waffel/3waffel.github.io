@@ -1,7 +1,7 @@
 import Header from "./components/header";
 import Footer from "./components/footer";
 import Navbar from "./components/navbar";
-import Sketchboard from "./components/sketchboard";
+import SketchContainer from "./components/sketchcontainer";
 import Home from "./pages/home";
 import Projects from "./pages/projects";
 import Links from "./pages/links";
@@ -67,7 +67,7 @@ export default function App() {
         transition="opacity"
         hover="opacity-90"
       >
-        <Sketchboard />
+        <SketchContainer />
       </div>
     </div>
   );

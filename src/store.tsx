@@ -1,19 +1,13 @@
 import { atomWithStorage } from "jotai/utils";
 import { atomWithQuery } from "jotai-tanstack-query";
-
-export enum BackgroundOption {
-  None,
-  Star,
-  Flow,
-  Spire,
-}
+import { SketchEnum } from "./sketches";
 
 type SettingsType = {
-  backgroundOption: BackgroundOption;
+  sketchOption: SketchEnum;
 };
 
 export const settingsAtom = atomWithStorage<SettingsType>("settings", {
-  backgroundOption: null,
+  sketchOption: SketchEnum.None,
 });
 
 export const linksAtom = atomWithQuery((get) => ({
