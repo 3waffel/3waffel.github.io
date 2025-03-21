@@ -23,7 +23,7 @@ const router = createBrowserRouter([
     element: (
       <>
         <Header />
-        <div className="h-full min-h-10 min-w-60 flex overflow-y-auto">
+        <div className="h-full min-h-10 min-w-60 flex">
           <Navbar navigators={navigators} />
           <Outlet />
         </div>
@@ -65,7 +65,7 @@ export default function App() {
         <RouterProvider router={router} />
       </div>
       <div
-        id="sketchboardContainer"
+        id="sketchContainer"
         className="absolute h-full w-full overflow-hidden bg-transparent opacity-50 duration-500"
         transition="opacity"
         hover="opacity-90"

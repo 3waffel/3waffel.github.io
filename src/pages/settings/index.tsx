@@ -1,6 +1,6 @@
 import { useAtom } from "jotai";
 import { settingsAtom } from "../../store";
-import { Dropdown, Radio, Label } from "flowbite-react";
+import { Radio, Label } from "flowbite-react";
 import { SketchEnum } from "../../sketches";
 
 const sketchOptions = Object.keys(SketchEnum).filter((e) =>
@@ -11,17 +11,9 @@ export default function Settings() {
   const [settings, updateSettings] = useAtom(settingsAtom);
 
   return (
-    <div
-      className="min-w-60 p-5 pt-3 gap-3"
-      flex="~ col"
-      text="orange50"
-      font="serif"
-    >
+    <div className="outlet">
       <h2 className="h-auto">Settings</h2>
-      <fieldset
-        className="fieldset flex max-w-md flex-col gap-2"
-        name="sketchOptions"
-      >
+      <fieldset className="fieldset flex flex-col gap-2" name="sketchOptions">
         <legend font="serif bold">Sketches</legend>
         {sketchOptions.map((option, i) => (
           <div
@@ -35,7 +27,9 @@ export default function Settings() {
               name="sketchOptions"
               onClick={() => updateSettings({ ...settings, sketchOption: i })}
             />
-            <Label htmlFor={option} font="italic">{option}</Label>
+            <Label htmlFor={option} font="italic">
+              {option}
+            </Label>
           </div>
         ))}
       </fieldset>

@@ -1,12 +1,11 @@
-import { Link } from "react-router-dom";
 import { useAtom } from "jotai";
-import { linksAtom } from "../../store";
+import { getLinksAtom } from "../../store";
 
 export default function Links() {
-  const [{ data, isPending, isError }] = useAtom(linksAtom);
+  const [response] = useAtom(getLinksAtom);
 
   const buildLinks = (links) => (
-    <div className="pl-3" grid="~ cols-1 gap-2">
+    <div className="pl-3 pr-3" grid="~ cols-1 gap-2">
       {links?.map((item, i) => (
         <div className="items-center flex flex-row font-italic">
           <a className="min-w-6">{item.icon}</a>
@@ -23,12 +22,12 @@ export default function Links() {
   );
 
   let content;
-  if (isPending) {
+  if (response.state === "loading") {
     content = <div>Loading</div>;
-  } else if (isError) {
+  } else if (response.state === "hasError") {
     content = <div>Failed to load</div>;
-  } else {
-    const links = data["links"];
+  } else if (response.state === "hasData") {
+    const links = response.data["links"];
     content = Object.entries(links).map(([key, value]) => (
       <fieldset key={key} className="fieldset">
         <legend font="bold">
@@ -40,12 +39,7 @@ export default function Links() {
   }
 
   return (
-    <div
-      className="min-w-60 p-5 pt-3 gap-3"
-      flex="~ col"
-      text="orange50"
-      font="serif"
-    >
+    <div className="outlet">
       <h2>Links</h2>
       {content}
     </div>

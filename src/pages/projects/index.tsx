@@ -1,13 +1,13 @@
 import { useAtom } from "jotai";
-import { linksAtom } from "../../store";
+import { getLinksAtom } from "../../store";
 
 export default function Projects() {
-  const [{ data, isPending, isError }] = useAtom(linksAtom);
+  const [response] = useAtom(getLinksAtom);
 
   const buildProjects = (projects) => (
-    <div grid="~ cols-2 gap-4">
+    <div className="pl-3 pr-3" grid="~ cols-2 gap-4">
       {projects?.map((item, i) => (
-        <div key={i} className="">
+        <div key={i}>
           <a
             className="link-text-orange200 visited-text-orange300"
             font="italic"
@@ -22,12 +22,12 @@ export default function Projects() {
   );
 
   let content;
-  if (isPending) {
+  if (response.state === "loading") {
     content = <div>Loading</div>;
-  } else if (isError) {
+  } else if (response.state === "hasError") {
     content = <div>Failed to load</div>;
-  } else {
-    const projects = data["projects"];
+  } else if (response.state === "hasData") {
+    const projects = response.data["projects"];
     content = Object.entries(projects).map(([key, value]) => (
       <fieldset key={key} className="fieldset">
         <legend font="bold">
@@ -39,12 +39,7 @@ export default function Projects() {
   }
 
   return (
-    <div
-      className="min-w-60 p-5 pt-3 gap-3"
-      flex="~ col"
-      text="orange50"
-      font="serif"
-    >
+    <div className="outlet">
       <h2>Projects</h2>
       {content}
     </div>
