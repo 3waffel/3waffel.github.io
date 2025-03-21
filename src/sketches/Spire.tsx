@@ -2,9 +2,9 @@ import { P5CanvasInstance } from "@p5-wrapper/react";
 
 // parameters
 // const choices = ["あ", "い", "う", "え", "お"];
-let duration = 150;
-let speed = 0.03;
-let interval = 10;
+const duration = 150;
+const speed = 0.03;
+const interval = 10;
 const radius = (size) => size * 10;
 const x = (offset, size) => Math.atan(Math.cos(offset * speed)) * radius(size);
 const y = (offset, size) => Math.atan(Math.sin(offset * speed)) * radius(size);
@@ -12,8 +12,8 @@ const y = (offset, size) => Math.atan(Math.sin(offset * speed)) * radius(size);
 export function spireSketch(p5: P5CanvasInstance) {
   const element = (p5: P5CanvasInstance) => {
     const salt = (max = 1, seed = 0) => p5.noise(Math.random() + seed) * max;
-    let color = [salt(55) + 200, salt(55) + 200, salt(55) + 200];
-    let c = ".";
+    const color = [salt(55) + 200, salt(55) + 200, salt(55) + 200];
+    const c = ".";
     p5.push();
     p5.fill(color);
     p5.text(c, 0, 0);
@@ -37,8 +37,8 @@ export function spireSketch(p5: P5CanvasInstance) {
     p5.translate(innerWidth / 2, innerHeight / 2);
 
     for (let i = 0; i < 1000; i += interval) {
-      let offset = t + i;
-      let size = offset % duration;
+      const offset = t + i;
+      const size = offset % duration;
       p5.push();
       p5.textSize(size);
       p5.translate(

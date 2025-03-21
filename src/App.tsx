@@ -1,12 +1,15 @@
+import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
+import { lazy } from "react";
+
 import Header from "./components/header";
 import Footer from "./components/footer";
 import Navbar from "./components/navbar";
-import SketchContainer from "./components/sketchcontainer";
+const SketchContainer = lazy(() => import("./components/sketchContainer"));
+
 import Home from "./pages/home";
 import Projects from "./pages/projects";
 import Links from "./pages/links";
-import Settings from "./pages/settings";
-import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
+const Settings = lazy(() => import("./pages/settings"));
 
 const navigators = [
   { to: "/projects", name: "Projects" },

@@ -1,6 +1,6 @@
 import { useAtom } from "jotai";
 import { settingsAtom } from "../../store";
-import { Dropdown } from "flowbite-react";
+import { Dropdown, Radio, Label } from "flowbite-react";
 import { SketchEnum } from "../../sketches";
 
 const sketchOptions = Object.keys(SketchEnum).filter((e) =>
@@ -12,33 +12,33 @@ export default function Settings() {
 
   return (
     <div
-      className="min-w-60 p-5 pt-3"
+      className="min-w-60 p-5 pt-3 gap-3"
       flex="~ col"
       text="orange50"
       font="serif"
     >
       <h2 className="h-auto">Settings</h2>
-      <Dropdown
-        label="Background"
-        p="t-2"
-        bg="transparent"
-        text="orange50 hover:orange2"
-        border="dashed 0 t-2 orange1"
-        font="serif bold"
+      <fieldset
+        className="fieldset flex max-w-md flex-col gap-2"
+        name="sketchOptions"
       >
+        <legend font="serif bold">Sketches</legend>
         {sketchOptions.map((option, i) => (
-          <Dropdown.Item
+          <div
             key={i}
-            onClick={() => updateSettings({ ...settings, sketchOption: i })}
-            className="pt-2 pb-2 bg-transparent"
-            text="orange50 hover:orange200"
-            border="dashed 0 t-2 orange1"
-            font="serif"
+            className="flex items-center gap-1"
+            text="orange50 hover:orange2"
           >
-            {option}
-          </Dropdown.Item>
+            <Radio
+              className="w-4 accent-amber"
+              value={option}
+              name="sketchOptions"
+              onClick={() => updateSettings({ ...settings, sketchOption: i })}
+            />
+            <Label htmlFor={option} font="italic">{option}</Label>
+          </div>
         ))}
-      </Dropdown>
+      </fieldset>
     </div>
   );
 }

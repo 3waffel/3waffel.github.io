@@ -1,22 +1,135 @@
-// Code adopted from "Creating a Gradient Color in Fragment Shader"
-// by Bahadır on stackoverflow.com
-// https://stackoverflow.com/questions/47376499/creating-a-gradient-color-in-fragment-shader
+precision highp float;
 
+#define EPS 0.0001
 
-precision highp float; varying vec2 vPos;
-uniform vec2 offset;
-uniform vec3 colorCenter;
-uniform vec3 colorBackground;
+uniform float time;
+uniform vec2 resolution;
 
-void main() {
+float radiusOffset = 2.6;
 
-  vec2 st = vPos.xy + offset.xy;
+struct Camera {
+  vec3 position;
+  vec3 direction;
+  vec3 top;
+  vec3 side;
+  float depth;
+};
 
-  // color1 = vec3(1.0,0.55,0);
-  // color2 = vec3(0.226,0.000,0.615);
+struct Ray {
+  vec3 origin;
+  vec3 direction;
+};
 
-  float mixValue = distance(st,vec2(0,1));
-  vec3 color = mix(colorCenter,colorBackground,mixValue);
+Camera createCamera(vec3 position, vec3 direction, float depth) {
+  Camera cam;
+  cam.position = position;
+  cam.direction = direction;
+  cam.top = vec3(0.0, 1.0, 0.0);
+  cam.side = normalize(cross(cam.direction, cam.top));
+  cam.depth = depth;
+  return cam;
+}
 
-  gl_FragColor = vec4(color,mixValue);
+Ray createRay(vec2 uv, Camera cam) {
+  vec3 dir = normalize(uv.x * cam.side + uv.y * cam.top + cam.direction * cam.depth);
+  Ray ray;
+  ray.direction = dir;
+  ray.origin = cam.position;
+  return ray;
+}
+
+mat2 rotate2D(float angle) {
+  return mat2(cos(angle), sin(angle), -sin(angle), cos(angle));
+}
+
+float sdCappedCylinder(vec3 p, vec2 h) {
+  vec2 d = abs(vec2(length(p.xz), p.y)) - h;
+  return min(max(d.x, d.y), 0.0) + length(max(d, 0.0));
+}
+
+float sdRect(vec2 p, vec2 b) {
+  vec2 d = abs(p) - b;
+  return min(max(d.x, d.y), 0.0) + length(max(d, 0.0));
+}
+
+vec3 texture(vec2 p) {
+  vec2 q = (fract(p / 10.0) - 0.5) * 10.0;
+  float d = 9999.0;
+  for(int i = 0; i < 4; ++i) {
+    q = abs(q) - 0.5;
+    q *= rotate2D(0.8);
+    q = abs(q) - 0.5;
+    float k = sdRect(q, vec2(1.0, 0.5 + q.x));
+    d = min(d, k);
+  }
+  float f = 1.0 / (1.0 + abs(d));
+  return vec3(pow(f, 16.0) + step(0.935, f));
+}
+
+float distFunc(vec3 p) {
+  vec3 v = mod(p, radiusOffset) - radiusOffset / 2.0;
+  v.yz *= rotate2D(radians(90.0));
+
+  float vvv = floor(v.y) * 2.0 - 1.0;
+
+  float s = (sin(time) + 1.0) / 2.0 * 0.2 * vvv;
+  float c1 = sdCappedCylinder(v, vec2(0.8 + s, 0.05));
+  float c2 = sdCappedCylinder(v, vec2(0.7 + s, 0.055));
+
+  float dist = max(c1, -c2);
+
+  return dist;
+}
+
+vec3 getRayPosition(Ray ray, float rayLen) {
+  return ray.origin + ray.direction * rayLen;
+}
+
+vec3 getNormal(vec3 p) {
+  return normalize(vec3(distFunc(p + vec3(EPS, 0.0, 0.0)) - distFunc(p + vec3(-EPS, 0.0, 0.0)), distFunc(p + vec3(0.0, EPS, 0.0)) - distFunc(p + vec3(0.0, -EPS, 0.0)), distFunc(p + vec3(0.0, 0.0, EPS)) - distFunc(p + vec3(0.0, 0.0, -EPS))));
+}
+
+void main(void) {
+  vec2 uv = (gl_FragCoord.xy * 2.0 - resolution.xy) / min(resolution.x, resolution.y);
+
+  uv *= rotate2D(time * 0.2);
+
+  Camera cam = createCamera(vec3(radiusOffset / 2.0, radiusOffset / 2.0, -time * 1.0), vec3(0.0, 0.0, -1.0), 1.0);
+
+  Ray ray = createRay(uv, cam);
+
+  float rayLen = 0.01;
+  float dist;
+  vec3 rayPosition = getRayPosition(ray, rayLen);
+  bool hit = false;
+
+  for(int i = 0; i < 64; i++) {
+    dist = distFunc(rayPosition);
+    rayLen += dist;
+    rayPosition = getRayPosition(ray, rayLen);
+
+    if(abs(dist) < EPS) {
+      hit = true;
+      break;
+    }
+  }
+
+  vec3 color = vec3(rayPosition);
+  vec3 lightDir = normalize(vec3(0.8, 0.8, 1.0));
+
+  if(hit) {
+    vec3 normal = getNormal(rayPosition);
+    float diff = clamp(dot(lightDir, normal), 0.1, 1.0);
+    color = vec3(0.0, 0.0, 0.9) * diff;
+
+    vec3 globe = texture(normal.zy) + texture(normal.xz) + texture(normal.xy);
+    color = mix(color, vec3(1.0, 0.0, 0.0), globe);
+  } else {
+    color = vec3(1.0, 0.0, 1.0);
+  }
+
+  vec3 backgroundColor = vec3(0.8);
+  color = mix(backgroundColor, color, exp(-0.1 * rayLen));
+
+  gl_FragColor = vec4(color, 1.0);
 }

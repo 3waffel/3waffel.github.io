@@ -4,7 +4,7 @@ import App from "./App.tsx";
 import { Provider } from "jotai";
 import "virtual:uno.css";
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <Provider>
       <App />

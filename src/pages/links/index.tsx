@@ -6,15 +6,18 @@ export default function Links() {
   const [{ data, isPending, isError }] = useAtom(linksAtom);
 
   const buildLinks = (links) => (
-    <div className="mb-5 pl-3" grid="~ cols-1 gap-2">
+    <div className="pl-3" grid="~ cols-1 gap-2">
       {links?.map((item, i) => (
-        <a
-          className="link-text-orange100 visited-text-orange100"
-          href={item.url}
-          key={i}
-        >
-          {item.icon} {item.name}
-        </a>
+        <div className="items-center flex flex-row font-italic">
+          <a className="min-w-6">{item.icon}</a>
+          <a
+            className="link-text-orange200 visited-text-orange300"
+            href={item.url}
+            key={i}
+          >
+            {item.name}
+          </a>
+        </div>
       ))}
     </div>
   );
@@ -27,16 +30,21 @@ export default function Links() {
   } else {
     const links = data["links"];
     content = Object.entries(links).map(([key, value]) => (
-      <div key={key}>{buildLinks(value)}</div>
+      <fieldset key={key} className="fieldset">
+        <legend font="bold">
+          {key.charAt(0).toUpperCase() + key.slice(1)}
+        </legend>
+        {buildLinks(value)}
+      </fieldset>
     ));
   }
 
   return (
     <div
-      className="min-w-60 p-5 pt-3"
+      className="min-w-60 p-5 pt-3 gap-3"
       flex="~ col"
       text="orange50"
-      font="serif bold"
+      font="serif"
     >
       <h2>Links</h2>
       {content}

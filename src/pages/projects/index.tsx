@@ -5,18 +5,16 @@ export default function Projects() {
   const [{ data, isPending, isError }] = useAtom(linksAtom);
 
   const buildProjects = (projects) => (
-    <div grid="~ cols-2 gap-2">
+    <div grid="~ cols-2 gap-4">
       {projects?.map((item, i) => (
-        <div key={i} className="pt3 pb3" border="t-2 0 dashed">
-          <li>
-            <a
-              className="link-text-orange100 visited-text-orange100"
-              font="bold"
-              href={item.url}
-            >
-              {item.name}
-            </a>
-          </li>
+        <div key={i} className="">
+          <a
+            className="link-text-orange200 visited-text-orange300"
+            font="italic"
+            href={item.url}
+          >
+            {item.name}
+          </a>
           <div>{item.description}</div>
         </div>
       ))}
@@ -31,16 +29,18 @@ export default function Projects() {
   } else {
     const projects = data["projects"];
     content = Object.entries(projects).map(([key, value]) => (
-      <div key={key}>
-        <p font="bold">{key.charAt(0).toUpperCase() + key.slice(1)}</p>
+      <fieldset key={key} className="fieldset">
+        <legend font="bold">
+          {key.charAt(0).toUpperCase() + key.slice(1)}
+        </legend>
         {buildProjects(value)}
-      </div>
+      </fieldset>
     ));
   }
 
   return (
     <div
-      className="min-w-60 p-5 pt-3"
+      className="min-w-60 p-5 pt-3 gap-3"
       flex="~ col"
       text="orange50"
       font="serif"
