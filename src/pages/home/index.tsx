@@ -4,10 +4,10 @@ const markdown = `
 ## Home
 
 **Recently interested topics:**
-- Frontend development, web design
-- Graphics development, including Game Engines and Generative Art
+- Frontend development, Web Design
+- Graphics development, Game Engines and Generative Art
 - DevOps, CI/CD
-- Low level development, including hardware and operating system
+- Low level development, Hardware and Operating System
 
 **Languages I usually use:**
 - Experienced: C++, C#, Python, Typescript

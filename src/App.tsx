@@ -23,7 +23,7 @@ const router = createBrowserRouter([
     element: (
       <>
         <Header />
-        <div className="h-full min-h-10 min-w-60 flex">
+        <div className="h-full min-h50 min-w50 flex">
           <Navbar navigators={navigators} />
           <Outlet />
         </div>

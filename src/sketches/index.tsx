@@ -6,21 +6,21 @@ import { shaderDemoSketch } from "./ShaderDemo";
 import { ramenSketch } from "./Ramen";
 
 export enum SketchEnum {
-  None,
-  Star,
-  Flow,
-  Spire,
+  Void,
+  Falling_Stars,
+  Flowing,
+  Spiral,
   // Ramen,
-  ShaderDemo,
+  Shader_Demo,
 }
 
 export const getSketch = (sketch: SketchEnum) => {
   const sketchMapper: Record<SketchEnum, Sketch> = {
-    [SketchEnum.None]: null,
-    [SketchEnum.Star]: starSketch,
-    [SketchEnum.Flow]: flowSketch,
-    [SketchEnum.Spire]: spireSketch,
-    [SketchEnum.ShaderDemo]: shaderDemoSketch,
+    [SketchEnum.Void]: null,
+    [SketchEnum.Falling_Stars]: starSketch,
+    [SketchEnum.Flowing]: flowSketch,
+    [SketchEnum.Spiral]: spireSketch,
+    [SketchEnum.Shader_Demo]: shaderDemoSketch,
     // [SketchEnum.Ramen]: ramenSketch,
   };
   return sketchMapper[sketch];

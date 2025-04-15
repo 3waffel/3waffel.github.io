@@ -12,10 +12,10 @@ export function ramenSketch(p5: P5CanvasInstance) {
   };
 
   function bottom() {
-    // bowl?
     p5.push();
     p5.translate(innerWidth / 2, innerHeight / 1.4);
 
+    // bowl?
     p5.push();
     let h = 0;
     let gap = Math.max(30, 30 * (innerWidth / 720));
@@ -24,6 +24,12 @@ export function ramenSketch(p5: P5CanvasInstance) {
       p5.ellipse(0, 0, r, r / 1.2);
       h = (h + 5) % 360;
     }
+
+    // decorating?
+    p5.noStroke()
+    p5.fill(50, 80, 60)
+    p5.rotate(30, [-1, 0, 1])
+    p5.rect(innerWidth * 0.2, innerWidth * 0.01, innerWidth * 0.4 ,  innerWidth * 0.3 )
     p5.pop();
 
     // soup?
@@ -59,13 +65,6 @@ export function ramenSketch(p5: P5CanvasInstance) {
     }
     p5.endShape();
     p5.pop();
-
-    p5.push()
-    p5.noStroke()
-    p5.fill(50, 80, 60)
-    p5.rotate(30, [-1, 0, 1])
-    p5.rect(70, 80, 270, 380)
-    p5.pop()
 
     p5.pop();
   }

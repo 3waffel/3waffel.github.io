@@ -7,7 +7,7 @@ type SettingsType = {
 };
 
 export const settingsAtom = atomWithStorage<SettingsType>("settings", {
-  sketchOption: SketchEnum.None,
+  sketchOption: SketchEnum.Void,
 });
 
 export const linksAtom = atomWithCache(async (get) => {
