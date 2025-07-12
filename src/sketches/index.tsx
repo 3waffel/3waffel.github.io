@@ -7,20 +7,20 @@ import { ramenSketch } from "./Ramen";
 
 export enum SketchEnum {
   Void,
-  Falling_Stars,
+  FallingStars,
   Flowing,
   Spiral,
   // Ramen,
-  Shader_Demo,
+  ShaderDemo,
 }
 
 export const getSketch = (sketch: SketchEnum) => {
   const sketchMapper: Record<SketchEnum, Sketch> = {
     [SketchEnum.Void]: null,
-    [SketchEnum.Falling_Stars]: starSketch,
+    [SketchEnum.FallingStars]: starSketch,
     [SketchEnum.Flowing]: flowSketch,
     [SketchEnum.Spiral]: spireSketch,
-    [SketchEnum.Shader_Demo]: shaderDemoSketch,
+    [SketchEnum.ShaderDemo]: shaderDemoSketch,
     // [SketchEnum.Ramen]: ramenSketch,
   };
   return sketchMapper[sketch];

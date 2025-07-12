@@ -11,7 +11,7 @@ const markdown = `
 
 **Languages I usually use:**
 - Experienced: C++, C#, Python, Typescript
-- Hobby: Rust
+- Hobby: Rust, Haskell
 `;
 
 export default function Home() {

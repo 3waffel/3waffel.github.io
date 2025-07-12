@@ -68,7 +68,7 @@ export default function App() {
         id="sketchContainer"
         className="absolute h-full w-full overflow-hidden bg-transparent opacity-50 duration-500"
         transition="opacity"
-        hover="opacity-90"
+        hover="opacity-100"
       >
         <SketchContainer />
       </div>

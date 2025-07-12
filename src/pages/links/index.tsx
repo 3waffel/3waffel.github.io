@@ -7,10 +7,10 @@ export default function Links() {
   const buildLinks = (links) => (
     <div className="pl-3 pr-3" grid="~ cols-1 gap-2">
       {links?.map((item, i) => (
-        <div className="items-center flex flex-row font-italic">
+        <div className="items-center flex flex-row">
           <a className="min-w-6">{item.icon}</a>
           <a
-            className="link-text-orange200 visited-text-orange300"
+            className="link-text-orange200 visited-text-orange300 font-italic"
             href={item.url}
             key={i}
           >
