@@ -14,10 +14,11 @@ export default function Header() {
         flex="~ row"
         to="/"
       >
-        <h2 className="fw500" text="orange50 hover:orange200">
-          📝
-        </h2>
-        <h2 className="fw500" text="orange100">
+        <h2
+          className="tracking-1 scale-x-[2] scale-y-[1.4] origin-[0] fw-black"
+          text="orange100"
+          hover="text-orange200"
+        >
           Index
         </h2>
       </Link>

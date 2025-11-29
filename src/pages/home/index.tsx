@@ -10,7 +10,7 @@ const markdown = `
 - Low level development, Hardware and Operating System
 
 **Languages I usually use:**
-- Experienced: C++, C#, Python, Typescript
+- Experienced: Typescript, Python, Java, C#, C++, Dart
 - Hobby: Rust, Haskell
 `;
 
