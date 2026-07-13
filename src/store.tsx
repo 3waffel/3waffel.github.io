@@ -1,7 +1,7 @@
-import { atomWithStorage, loadable } from "jotai/utils";
-import { SketchEnum } from "./sketches";
-import { atomWithCache } from "jotai-cache";
 import { faker } from "@faker-js/faker";
+import { atomWithStorage, loadable } from "jotai/utils";
+import { atomWithCache } from "jotai-cache";
+import { SketchEnum } from "./sketches";
 
 export type SettingsType = {
   sketchOption: SketchEnum;
@@ -20,7 +20,7 @@ function generateDummyLinksData(
   linkCats = 3,
   linksPerCat = 5,
   projectCats = 2,
-  projectsPerCat = 4
+  projectsPerCat = 4,
 ) {
   const links: LinksDataType["links"] = {};
   for (let i = 0; i < linkCats; i++) {
@@ -54,7 +54,7 @@ export const linksAtom = atomWithCache(async (get) => {
     return generateDummyLinksData();
   } else {
     const res: LinksDataType = await fetch(
-      "https://gist.githubusercontent.com/3waffel/1fda54edefabc5f416031a3546ce1611/raw/links.json"
+      "https://gist.githubusercontent.com/3waffel/1fda54edefabc5f416031a3546ce1611/raw/links.json",
     ).then((result) => result.json());
     return res;
   }

@@ -1,14 +1,16 @@
-import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import { lazy } from "react";
+import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 
-import Header from "./components/header";
 import Footer from "./components/footer";
+import Header from "./components/header";
 import Navbar from "./components/navbar";
+
 const SketchContainer = lazy(() => import("./components/sketchContainer"));
 
 import Home from "./pages/home";
-import Projects from "./pages/projects";
 import Links from "./pages/links";
+import Projects from "./pages/projects";
+
 const Settings = lazy(() => import("./pages/settings"));
 
 const navigators = [
@@ -30,7 +32,11 @@ const router = createBrowserRouter([
         <Footer />
       </>
     ),
-    errorElement: <a className="p-30 text-orange50">Not Found</a>,
+    errorElement: (
+      <a className="p-30 text-orange50" href="/">
+        Not Found
+      </a>
+    ),
     children: [
       { path: "", element: <Home /> },
       {

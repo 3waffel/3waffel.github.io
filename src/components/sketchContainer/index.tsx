@@ -1,8 +1,8 @@
-import { useAtom } from "jotai";
-import { settingsAtom } from "../../store";
-import { getSketch } from "../../sketches";
-import { useEffect } from "react";
 import { ReactP5Wrapper } from "@p5-wrapper/react";
+import { useAtom } from "jotai";
+import { useEffect } from "react";
+import { getSketch } from "../../sketches";
+import { settingsAtom } from "../../store";
 
 export default function SketchContainer() {
   const [settings] = useAtom(settingsAtom);
