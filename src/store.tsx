@@ -1,10 +1,10 @@
 import { faker } from "@faker-js/faker";
 import { atomWithStorage, loadable } from "jotai/utils";
 import { atomWithCache } from "jotai-cache";
-import { SketchEnum } from "./sketches";
+import type { sketchMapper } from "./sketches";
 
 export type SettingsType = {
-  sketchOption: SketchEnum;
+  sketchOption: keyof typeof sketchMapper;
 };
 
 export type LinksDataType = {
@@ -46,7 +46,7 @@ function generateDummyLinksData(
 }
 
 export const settingsAtom = atomWithStorage<SettingsType>("settings", {
-  sketchOption: SketchEnum.Void,
+  sketchOption: "Void",
 });
 
 export const linksAtom = atomWithCache(async (get) => {

@@ -1,26 +1,17 @@
 import type { Sketch } from "@p5-wrapper/react";
-import { flowSketch } from "./Flow";
-import { shaderDemoSketch } from "./ShaderDemo";
-import { spireSketch } from "./Spire";
-import { starSketch } from "./Star";
+import flowSketch from "./Flow";
+import shaderDemoSketch from "./ShaderDemo";
+import spireSketch from "./Spire";
+import starSketch from "./Star";
 
-export enum SketchEnum {
-  Void,
-  FallingStars,
-  Flowing,
-  Spiral,
-  // Ramen,
-  ShaderDemo,
-}
+export const sketchMapper = {
+  Void: null,
+  FallingStars: starSketch,
+  Flowing: flowSketch,
+  Spiral: spireSketch,
+  ShaderDemo: shaderDemoSketch,
+} as const;
 
-export const getSketch = (sketch: SketchEnum) => {
-  const sketchMapper: Record<SketchEnum, Sketch | null> = {
-    [SketchEnum.Void]: null,
-    [SketchEnum.FallingStars]: starSketch,
-    [SketchEnum.Flowing]: flowSketch,
-    [SketchEnum.Spiral]: spireSketch,
-    [SketchEnum.ShaderDemo]: shaderDemoSketch,
-    // [SketchEnum.Ramen]: ramenSketch,
-  };
+export function getSketch(sketch: keyof typeof sketchMapper): Sketch | null {
   return sketchMapper[sketch];
-};
+}

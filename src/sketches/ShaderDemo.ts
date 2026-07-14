@@ -3,7 +3,7 @@ import type { Shader } from "p5";
 import fragShader from "../glsl/main.frag";
 import vertShader from "../glsl/main.vert";
 
-export function shaderDemoSketch(p5: P5CanvasInstance) {
+export default function shaderDemoSketch(p5: P5CanvasInstance) {
   let _shader: Shader;
 
   p5.preload = () => {

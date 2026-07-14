@@ -15,7 +15,8 @@ export default function Header() {
         to="/"
       >
         <h2
-          className="tracking-1 scale-x-[4] scale-y-[2] origin-[0]"
+          className="tracking-1 scale-x-[4] scale-y-[2] origin-lb"
+          transition={true}
           text="orange100"
           hover="text-orange200"
         >

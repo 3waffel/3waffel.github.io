@@ -22,6 +22,6 @@ export default defineConfig({
   shortcuts: {
     fieldset: "border-2 border-solid border-orange50",
     outlet:
-      "w-160 p-5 pt-3 gap-3 flex flex-col overflow-y-auto text-orange50 font-sans",
+      "max-w-160 w-full p-5 pt-3 gap-3 flex flex-col overflow-y-auto text-orange50 font-sans",
   },
 });

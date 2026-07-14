@@ -1,7 +1,7 @@
 import type { P5CanvasInstance } from "@p5-wrapper/react";
 import { Vector } from "p5";
 
-export function starSketch(p5: P5CanvasInstance) {
+export default function starSketch(p5: P5CanvasInstance) {
   class Particle {
     x: number;
     y: number;

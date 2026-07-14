@@ -9,7 +9,7 @@ const radius = (size) => size * 10;
 const x = (offset, size) => Math.atan(Math.cos(offset * speed)) * radius(size);
 const y = (offset, size) => Math.atan(Math.sin(offset * speed)) * radius(size);
 
-export function spireSketch(p5: P5CanvasInstance) {
+export default function spireSketch(p5: P5CanvasInstance) {
   const element = (p5: P5CanvasInstance) => {
     const salt = (max = 1, seed = 0) => p5.noise(Math.random() + seed) * max;
     const color = [salt(55) + 200, salt(55) + 200, salt(55) + 200];
@@ -43,7 +43,7 @@ export function spireSketch(p5: P5CanvasInstance) {
       p5.textSize(size);
       p5.translate(
         x(offset, size) + p5.noise(i) * 500,
-        y(offset, size) + p5.noise(i) * 500
+        y(offset, size) + p5.noise(i) * 500,
       );
       element(p5);
       p5.pop();

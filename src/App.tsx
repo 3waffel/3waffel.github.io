@@ -25,7 +25,7 @@ const router = createBrowserRouter([
     element: (
       <>
         <Header />
-        <div className="h-full min-h50 min-w50 flex">
+        <div className="h-full w-full flex">
           <Navbar navigators={navigators} />
           <Outlet />
         </div>
@@ -64,7 +64,9 @@ export default function App() {
       flex="~ justify-center"
     >
       <div
-        className="z-1 m-3 min-w-40% bg-transparent"
+        className="z-1 m-3 min-w-full bg-transparent"
+        md="min-w-60%"
+        xl="min-w-40%"
         hover="animate-paused"
         flex="~ col"
       >
