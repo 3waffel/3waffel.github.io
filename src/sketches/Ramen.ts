@@ -1,4 +1,4 @@
-import { P5CanvasInstance } from "@p5-wrapper/react";
+import type { P5CanvasInstance } from "@p5-wrapper/react";
 
 export function ramenSketch(p5: P5CanvasInstance) {
   p5.windowResized = () => {
@@ -18,7 +18,7 @@ export function ramenSketch(p5: P5CanvasInstance) {
     // bowl?
     p5.push();
     let h = 0;
-    let gap = Math.max(30, 30 * (innerWidth / 720));
+    const gap = Math.max(30, 30 * (innerWidth / 720));
     for (let r = innerWidth * 0.9; r > 0; r -= gap) {
       p5.fill(220, 40 + h, 40 + h);
       p5.ellipse(0, 0, r, r / 1.2);

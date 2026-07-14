@@ -10,12 +10,12 @@ export default function Header() {
     >
       <Link
         className="items-center underline-transparent gap-3"
-        font="serif"
+        font="mono"
         flex="~ row"
         to="/"
       >
         <h2
-          className="tracking-1 scale-x-[2] scale-y-[1.4] origin-[0] fw-black"
+          className="tracking-1 scale-x-[4] scale-y-[2] origin-[0]"
           text="orange100"
           hover="text-orange200"
         >

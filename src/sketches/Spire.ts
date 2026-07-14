@@ -1,4 +1,4 @@
-import { P5CanvasInstance } from "@p5-wrapper/react";
+import type { P5CanvasInstance } from "@p5-wrapper/react";
 
 // parameters
 // const choices = ["あ", "い", "う", "え", "お"];

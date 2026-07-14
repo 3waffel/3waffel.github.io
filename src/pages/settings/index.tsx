@@ -1,10 +1,10 @@
+import { Label, Radio } from "flowbite-react";
 import { useAtom } from "jotai";
-import { settingsAtom } from "../../store";
-import { Radio, Label } from "flowbite-react";
 import { SketchEnum } from "../../sketches";
+import { settingsAtom } from "../../store";
 
 const sketchOptions = Object.keys(SketchEnum).filter((e) =>
-  isNaN(Number(e))
+  Number.isNaN(Number(e)),
 ) as Array<keyof typeof SketchEnum>;
 
 export default function Settings() {
@@ -17,19 +17,17 @@ export default function Settings() {
         <legend font="serif bold">Sketches</legend>
         {sketchOptions.map((option, i) => (
           <div
-            key={i}
-            className="flex items-center gap-1"
+            key={option}
+            className="pl-3 flex items-center gap-2"
             text="orange50 hover:orange2"
           >
             <Radio
-              className="w-4 accent-amber"
+              className="w4 h4 m0 accent-amber appearance-none b-style-solid b-1 checked-b-orange2 checked-bg-orange2"
               value={option}
               name="sketchOptions"
               onClick={() => updateSettings({ ...settings, sketchOption: i })}
             />
-            <Label htmlFor={option} font="italic">
-              {option}
-            </Label>
+            <Label htmlFor={option}>{option}</Label>
           </div>
         ))}
       </fieldset>

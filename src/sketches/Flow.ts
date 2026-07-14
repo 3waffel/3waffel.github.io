@@ -1,4 +1,4 @@
-import { P5CanvasInstance } from "@p5-wrapper/react";
+import type { P5CanvasInstance } from "@p5-wrapper/react";
 
 export function flowSketch(p5: P5CanvasInstance) {
   p5.windowResized = () => {

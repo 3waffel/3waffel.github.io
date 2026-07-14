@@ -1,9 +1,8 @@
-import { P5CanvasInstance, Sketch, SketchProps } from "@p5-wrapper/react";
+import type { Sketch } from "@p5-wrapper/react";
 import { flowSketch } from "./Flow";
+import { shaderDemoSketch } from "./ShaderDemo";
 import { spireSketch } from "./Spire";
 import { starSketch } from "./Star";
-import { shaderDemoSketch } from "./ShaderDemo";
-import { ramenSketch } from "./Ramen";
 
 export enum SketchEnum {
   Void,
@@ -15,7 +14,7 @@ export enum SketchEnum {
 }
 
 export const getSketch = (sketch: SketchEnum) => {
-  const sketchMapper: Record<SketchEnum, Sketch> = {
+  const sketchMapper: Record<SketchEnum, Sketch | null> = {
     [SketchEnum.Void]: null,
     [SketchEnum.FallingStars]: starSketch,
     [SketchEnum.Flowing]: flowSketch,

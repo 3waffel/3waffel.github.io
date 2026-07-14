@@ -1,11 +1,27 @@
-import { defineConfig, presetWind3, presetAttributify } from "unocss";
+import {
+  defineConfig,
+  presetAttributify,
+  presetWebFonts,
+  presetWind3,
+} from "unocss";
 
 export default defineConfig({
   rules: [],
-  presets: [presetWind3(), presetAttributify()],
+  presets: [
+    presetWind3(),
+    presetAttributify(),
+    presetWebFonts({
+      provider: "none",
+      fonts: {
+        sans: "Libertinus Sans",
+        serif: "Libertinus Serif",
+        mono: "Libertinus Mono",
+      },
+    }),
+  ],
   shortcuts: {
     fieldset: "border-2 border-solid border-orange50",
     outlet:
-      "w-160 p-5 pt-3 gap-3 flex flex-col overflow-y-auto text-orange50 font-serif",
+      "w-160 p-5 pt-3 gap-3 flex flex-col overflow-y-auto text-orange50 font-sans",
   },
 });

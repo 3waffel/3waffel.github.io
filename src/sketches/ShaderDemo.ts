@@ -1,7 +1,7 @@
-import { P5CanvasInstance } from "@p5-wrapper/react";
-import vertShader from "../glsl/main.vert";
+import type { P5CanvasInstance } from "@p5-wrapper/react";
+import type { Shader } from "p5";
 import fragShader from "../glsl/main.frag";
-import { Shader } from "p5";
+import vertShader from "../glsl/main.vert";
 
 export function shaderDemoSketch(p5: P5CanvasInstance) {
   let _shader: Shader;
